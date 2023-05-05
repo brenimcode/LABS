@@ -21,6 +21,7 @@ int main()
     case 'b':
         setbuf(stdin, NULL);
         gets(str1);
+        tamanho = strlen(str1);
         printf("%i", tamanho);
         break;
     case 'c':
@@ -100,15 +101,40 @@ int main()
                 break;
             }
         }
-        printf("%s",str1);
+        printf("%s", str1);
         break;
     case 'h':
-
+        setbuf(stdin, NULL);
+        printf("\nDigite S1: ");
+        gets(str1);
+        setbuf(stdin, NULL);
+        printf("\nDigite S2: ");
+        gets(str2);
+        if (strstr(str1, str2) != NULL)
+        {
+            printf("\nS2 eh substring de S1.\n");
+        }
+        else
+        {
+            printf("\nS2 NAO eh substring de S1\n");
+        }
         break;
     case 'i':
-
-        break;
-
+printf("Digite a string: \n");
+        setbuf(stdin, NULL);
+        gets(str1);
+        char subs[50];
+        printf("Digite o inicio: ");
+        int inicio;
+        scanf("%i", &inicio);
+        printf("Digite o final: ");
+        int final;
+        scanf("%i", &final);
+        int len = final - inicio + 1;
+        strncpy(subs,str1 + inicio, len);
+        str1[len] = '\0'; //ultimo recebe \0 para finalizar
+        printf("Substring: %s\n", subs);
+            break;
     default:
         break;
     }
