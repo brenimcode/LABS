@@ -65,6 +65,6 @@ int main()
         }
         printf("%d", vet[i]);
     }
-
+    free(vet);
     return 0;
 }
