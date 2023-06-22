@@ -2,7 +2,7 @@
 
 int main(){
     //Escreva um programa que contenha duas variáveis inteiras. Compare seus
-//endereços e exiba o maior endereço.
+//endereços e exiba o maior endereço..
 int a,b;
 int* a1;
 int* b1;

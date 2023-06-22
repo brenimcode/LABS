@@ -1,5 +1,5 @@
 #include <stdio.h>
-
+//.
 int main(){
     int vet[6];
     int i;

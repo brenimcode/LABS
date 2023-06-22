@@ -1,5 +1,5 @@
 #include <stdio.h>
-
+//.
 int main(){
     int n1,n2,n3;
     int *p1,*p2,*p3;

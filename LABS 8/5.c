@@ -2,6 +2,7 @@
 
 int main()
 {
+    //.
     int a, b;
     int soma;
     int *p1;
