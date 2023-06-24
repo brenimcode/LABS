@@ -1,62 +1,75 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+void sort(int *vetVal, int *veti, int *vetj, int m, int n);
+
 int main(){
-    int **mat,n,m,i,j,one,two,three,i1,i2,i3,j1,j2,j3;
-    printf("Insira linhas: ");
-    scanf("%d",&m);
-    printf("Insira colunas: ");
-    scanf("%d",&n);
-    mat = (int**) malloc(m*sizeof(int*));
-    for(i=0;i<n;i++){
-        mat[i] = (int *)malloc(n*sizeof(int));
+    int m, n, **a, *vetori, *vetorj, *vetorValores, pos = 0;
+    printf("Insira as dimensoes (MxN) da matriz A: ");
+    scanf("%d %d", &m, &n);
+
+    if((vetori = (int *)calloc(m*n, sizeof(int ))) == NULL){
+        printf("Erro ao alocar memoria");
+        exit(1);
     }
-    // Eu limpo todas as colunas depois eu limpo todas as linhas
-    for(i=0;i<m;i++){
-        for (j = 0; j < n; j++)
-        {
-            printf("Insira mat[%d][%d]: ",i,j);
-            scanf("%d",&mat[i][j]);
-        }
+
+    if((vetorj = (int *)calloc(m*n, sizeof(int ))) == NULL){
+        printf("Erro ao alocar memoria");
+        exit(1);
     }
-    // ver os 3 maiores numeros
-    one = mat[0][0];
-    two = mat[0][0];
-    three = mat[0][0];
-    for(i=0;i<m;i++){
-        for (j = 0; j < n; j++)
-        {
-            if(one < mat[i][j]){
-                one = mat[i][j];
-                i1 = i;
-                j1 = j;
-            }
+
+    if((vetorValores = (int *)calloc(m*n, sizeof(int ))) == NULL){
+        printf("Erro ao alocar memoria");
+        exit(1);
+    }
+    
+    if((a = (int **)calloc(m, sizeof(int *))) == NULL){
+        printf("Erro ao alocar memoria");
+        exit(1);
+    }
+
+    for(int i = 0; i < n; i++){
+        if((a[i] = (int *)calloc(n, sizeof(int))) == NULL){
+            printf("Erro ao alocar memoria");
+            exit(1);
         }
     }
 
-    for(i=0;i<m;i++){
-        for (j = 0; j < n; j++)
-        {
-            if(two < mat[i][j] && mat[i][j]<=one){
-                two = mat[i][j];
-                i2 = i;
-                j2 = j;
-            }  
+    for(int i = 0; i < m; i++){
+        for(int j = 0; j < n; j++, pos++){
+            printf("Insira a[%d][%d]: ",i,j);
+            scanf("%d", &a[i][j]);
+            vetorValores[pos] = a[i][j]; 
+            vetori[pos] = i;
+            vetorj[pos] = j;
         }
     }
-    /*
-    for(i=0;i<m;i++){
-        for (j = 0; j < n; j++)
-        {
-            if(three < mat[i][j] && three <=two){
-                three = mat[i][j];
-                i2 = i;
-                j2 = j;
-            }  
-        }
-    }*/
-    printf("{%d}\n",one);
-    printf("{%d}\n",two);
-    printf("{%d}\n",three);
+
+    sort(vetorValores, vetori, vetorj, m, n);
+
+    for(int i = (m*n)-1; i > ((m*n)-1)-3; i--){
+        printf("A[%d][%d] = %d\n", vetori[i], vetorj[i], vetorValores[i]);
+    }
+    
     return 0;
+}
+
+void sort(int *vetVal, int *veti, int *vetj, int m, int n){
+    int i, key, j;
+    int mn = m*n;
+    for (i = 1; i < mn; i++) {
+        key = vetVal[i];
+        j = i - 1;
+ 
+        /* Move elements of arr[0..i-1], that are
+          greater than key, to one position ahead
+          of their current position */
+        while (j >= 0 && vetVal[j] > key) {
+            vetVal[j + 1] = vetVal[j];
+            veti[j + 1] = veti[j];
+            vetj[j + 1] = vetj[j];
+            j = j - 1;
+        }
+        vetVal[j + 1] = key;
+    }
 }
