@@ -46,7 +46,7 @@ void leitura(char *nome, int *vogais, int *consoantes)
 }
 int main()
 {
-    char *nome = {"nome.txt"};
+    char *nome = {"ex04.txt"};
     int vogais = 0, consoantes = 0;
     escrita(nome);
     leitura(nome,&vogais,&consoantes);
